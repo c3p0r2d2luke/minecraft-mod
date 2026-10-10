@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DDD",
+    "DRD",
+    "DDD"
+  ],
+  "key": {
+    "D": "minecraft:diamond",
+    "R": "minecraft:redstone"
+  },
+  "result": {
+    "id": "hackcraft:ruby",
+    "count": 1
+  },
+  "_comment": "Or minecraft:crafting_shapeless"
+}
