@@ -48,7 +48,7 @@ public class Items {
                         ))
                         .sword(
                                 ToolMaterial.DIAMOND,
-                                4.0F,
+                                5.0F,
                                 -2.4F
                         )
         );
