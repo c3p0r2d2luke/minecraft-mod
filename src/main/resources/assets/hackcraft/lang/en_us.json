@@ -1,4 +1,9 @@
 {
   "item.hackcraft.ruby": "Ruby",
-  "item.hackcraft.ruby_sword": "Ruby Sword"
+  "item.hackcraft.ruby_sword": "Ruby Sword",
+  "item.hackcraft.ruby_axe": "Ruby Axe",
+  "item.hackcraft.ruby_hoe": "Ruby Hoe",
+  "item.hackcraft.ruby_pickaxe": "Ruby Pickaxe",
+  "item.hackcraft.ruby_spear": "Ruby Spear",
+  "item.hackcraft.ruby_shovel": "Ruby Shovel"
 }
