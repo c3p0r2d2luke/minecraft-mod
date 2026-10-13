@@ -3,13 +3,13 @@
 	"id": "hackcraft",
 	"version": "${version}",
 	"name": "Hackcraft",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "This mod gives you rubies! Also a ruby sword which does a lot of damage",
 	"authors": [
-		"Me!"
+		"Takeo Linder"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://frenzi4309.ipv64.net",
+		"sources": "https://github.com/c3p0r2d2luke/minecraft-mod"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/hackcraft/icon.png",
