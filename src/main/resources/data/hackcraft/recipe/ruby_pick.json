@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    " D ",
+    " D "
+  ],
+  "key": {
+    "D": "minecraft:stick",
+    "R": "hackcraft:ruby"
+  },
+  "result": {
+    "id": "hackcraft:ruby_pickaxe",
+    "count": 1
+  },
+  "_comment": "Or minecraft:crafting_shapeless"
+}

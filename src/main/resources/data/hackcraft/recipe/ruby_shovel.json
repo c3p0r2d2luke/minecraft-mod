@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " R ",
+    " D ",
+    " D "
+  ],
+  "key": {
+    "D": "minecraft:stick",
+    "R": "hackcraft:ruby"
+  },
+  "result": {
+    "id": "hackcraft:ruby_shovel",
+    "count": 1
+  },
+  "_comment": "Or minecraft:crafting_shapeless"
+}

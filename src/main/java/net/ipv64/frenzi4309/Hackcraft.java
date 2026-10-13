@@ -17,7 +17,7 @@ public class Hackcraft implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
-		LOGGER.info("Hello Fabric world!");
+		LOGGER.info("Welcome to my mod! I hope you like the rubies!");
 
 		Items.initialize();
 	}
