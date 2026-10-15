@@ -149,18 +149,18 @@ public class Items {
 
         CreativeModeTabEvents.modifyOutputEvent(
                 CreativeModeTabs.TOOLS_AND_UTILITIES
-        ).register(entries -> entries.accept(RUBY_SHOVEL))
+        ).register(entries -> entries.accept(RUBY_SHOVEL));
 
         CreativeModeTabEvents.modifyOutputEvent(
-                CretiveModeTabs.TOOLS_AND_UTILITES
-        ).register(entries -> entries.accept(RUBY_AXE))
+                CreativeModeTabs.TOOLS_AND_UTILITIES
+        ).register(entries -> entries.accept(RUBY_AXE));
 
         CreativeModeTabEvents.modifyOutputEvent(
-                CreativeModeTabs.TOOLS_AND_UTILITES
-        ).register(entries -> entries.accept(RUBY_PICKAXE))
+                CreativeModeTabs.TOOLS_AND_UTILITIES
+        ).register(entries -> entries.accept(RUBY_PICKAXE));
 
         CreativeModeTabEvents.modifyOutputEvent(
-                CreativeModeTabs.TOOLS_AND_UTILITES
-        ).register(entries -> entries.accept(RUBY_HOE))
+                CreativeModeTabs.TOOLS_AND_UTILITIES
+        ).register(entries -> entries.accept(RUBY_HOE));
     }
 }
