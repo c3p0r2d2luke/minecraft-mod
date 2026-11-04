@@ -12,6 +12,5 @@
   "result": {
     "id": "hackcraft:ruby_shovel",
     "count": 1
-  },
-  "_comment": "Or minecraft:crafting_shapeless"
+  }
 }

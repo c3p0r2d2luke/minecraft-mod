@@ -152,7 +152,6 @@ public class Items {
 
         CreativeModeTabEvents.modifyOutputEvent(
                 CreativeModeTabs.TOOLS_AND_UTILITIES
-<<<<<<< HEAD
         ).register(entries -> entries.accept(RUBY_AXE));
 
         CreativeModeTabEvents.modifyOutputEvent(
@@ -161,12 +160,6 @@ public class Items {
 
         CreativeModeTabEvents.modifyOutputEvent(
                 CreativeModeTabs.TOOLS_AND_UTILITIES
-=======
-        ).register(entries -> entries.accept(RUBY_PICKAXE));
-
-        CreativeModeTabEvents.modifyOutputEvent(
-                CreativeModeTabs.TOOLS_AND_UTILITIES
->>>>>>> 25f15d922be61fa5b565d037435053ce0925181e
         ).register(entries -> entries.accept(RUBY_HOE));
     }
 }
