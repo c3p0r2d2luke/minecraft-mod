@@ -1,24 +1,23 @@
 package net.ipv64.frenzi4309;
 
 import net.fabricmc.api.ModInitializer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 
 public class Hackcraft implements ModInitializer {
-	public static final String MOD_ID = "hackcraft";
 
-	// This logger is used to write text to the console and the log file.
-	// It is considered best practice to use your mod id as the logger's name.
-	// That way, it's clear which mod wrote info, warnings, and errors.
-	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-
-	@Override
-	public void onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
-		LOGGER.info("Welcome to my mod! I hope you like the rubies!");
-
-		Items.initialize();
-	}
+    @Override
+    public void onInitialize() {
+        Items.initialize();
+        LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
+            if (BuiltInLootTables.BURIED_TREASURE.equals(key)) {
+                tableBuilder.withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(Items.RUBY))
+                        .when(LootItemRandomChanceCondition.randomChance(0.1F)));
+            }
+        });
+    }
 }

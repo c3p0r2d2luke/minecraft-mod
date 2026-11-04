@@ -2,7 +2,6 @@
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
-
 public class wolf - Converted<T extends Entity> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "wolf_- converted"), "main");
@@ -137,4 +136,7 @@ public class wolf - Converted<T extends Entity> extends EntityModel<T> {
 		leg4.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		tail.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
+}
+
+void main() {
 }
