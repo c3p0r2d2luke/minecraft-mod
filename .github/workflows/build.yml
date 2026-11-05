@@ -11,7 +11,7 @@ jobs:
       - name: setup jdk
         uses: actions/setup-java@v4
         with:
-          java-version: '21' # Change to match your target Minecraft version
+          java-version: '25' # Change to match your target Minecraft version
           distribution: 'microsoft'
 
       - name: setup gradle
