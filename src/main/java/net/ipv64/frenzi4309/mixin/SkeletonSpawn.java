@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Skeleton.class)
-public abstract class SkeletonSpawnMixin {
+public abstract class SkeletonSpawn {
 
     @Inject(method = "finalizeSpawn", at = @At("RETURN"))
     private void onSkeletonSpawn(
