@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "net.ipv64.frenzi4309.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "WolfDeathMixin",
+    "SkeletonSpawnMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
