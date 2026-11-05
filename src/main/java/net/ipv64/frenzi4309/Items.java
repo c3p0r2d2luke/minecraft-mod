@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.ipv64.frenzi4309.entity.SkeletonWolfEntity;
 
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 
@@ -23,6 +24,18 @@ public class Items {
     public static final Item RUBY_PICKAXE = registerRubyPick();
 
     public static final Item RUBY_HOE = registerRubyHoe();
+
+    public static final Item SKELETON_WOLF_SPAWN_EGG = registerSkeletonWolfSpawnEgg();
+
+    private static Item registerSkeletonWolfSpawnEgg() {
+        Identifier id = Identifier.fromNamespaceAndPath("hackcraft", "skeleton_wolf_spawn_egg");
+        Item item = new Item(
+                new Item.Properties()
+                        .setId(ResourceKey.create(BuiltInRegistries.ITEM.key(), id))
+                        .spawnEgg(SkeletonWolfEntity.TYPE)
+        );
+        return Registry.register(BuiltInRegistries.ITEM, id, item);
+    }
 
     private static Item registerRuby() {
         Identifier id = Identifier.fromNamespaceAndPath("hackcraft", "ruby");
@@ -137,6 +150,10 @@ public class Items {
         CreativeModeTabEvents.modifyOutputEvent(
                 CreativeModeTabs.INGREDIENTS
         ).register(entries -> entries.accept(RUBY));
+
+        CreativeModeTabEvents.modifyOutputEvent(
+                CreativeModeTabs.SPAWN_EGGS
+        ).register(entries -> entries.accept(SKELETON_WOLF_SPAWN_EGG));
 
         CreativeModeTabEvents.modifyOutputEvent(
                 CreativeModeTabs.COMBAT

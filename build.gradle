@@ -6,6 +6,10 @@ plugins {
 version = project.mod_version
 group = project.maven_group
 
+base {
+    archivesName = project.archives_base_name
+}
+
 repositories {
     // Add third-party mod repositories here if needed
 }
@@ -14,7 +18,7 @@ loom {
     splitEnvironmentSourceSets()
 
     mods {
-        "hackcraft" {
+        hackcraft {
             sourceSet sourceSets.main
             sourceSet sourceSets.client
         }
@@ -37,6 +41,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = "UTF-8"
     it.options.release = 25
 }
 

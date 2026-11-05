@@ -1,11 +1,20 @@
-// Made with Blockbench 5.2.1
-// Exported for Minecraft version 1.17 or later with Mojang mappings
-// Paste this class into your mod and generate all required imports
+package net.ipv64.frenzi4309.client.model.entity;
 
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.resources.Identifier;
 
-public class SkeletonWolf<T extends Entity> extends EntityModel<T> {
-	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "SkeletonWolf"), "main");
+public class SkeletonWolf extends EntityModel<LivingEntityRenderState> {
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
+			Identifier.fromNamespaceAndPath("hackcraft", "skeleton_wolf"), "main");
 	private final ModelPart head;
 	private final ModelPart mane;
 	private final ModelPart body;
@@ -16,6 +25,7 @@ public class SkeletonWolf<T extends Entity> extends EntityModel<T> {
 	private final ModelPart tail;
 
 	public SkeletonWolf(ModelPart root) {
+		super(root);
 		this.head = root.getChild("head");
 		this.mane = root.getChild("mane");
 		this.body = root.getChild("body");
@@ -122,19 +132,16 @@ public class SkeletonWolf<T extends Entity> extends EntityModel<T> {
 	}
 
 	@Override
-	public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		head.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		mane.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		leg1.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		leg2.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		leg3.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		leg4.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		tail.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	public void setupAnim(LivingEntityRenderState state) {
+		float headRot = (float) (Math.PI / 180.0);
+		head.xRot = state.xRot * headRot;
+		head.yRot = (state.yRot - state.bodyRot) * headRot;
+		float walk = state.walkAnimationPos * 0.6662F;
+		float swing = 1.4F * state.walkAnimationSpeed;
+		leg1.xRot = (float) Math.cos(walk) * swing;
+		leg2.xRot = (float) Math.cos(walk + Math.PI) * swing;
+		leg3.xRot = (float) Math.cos(walk + Math.PI) * swing;
+		leg4.xRot = (float) Math.cos(walk) * swing;
+		tail.yRot = (float) Math.sin(state.ageInTicks * 0.2F) * 0.15F;
 	}
 }
