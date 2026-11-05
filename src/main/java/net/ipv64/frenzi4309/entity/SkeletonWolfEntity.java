@@ -11,6 +11,8 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.animal.wolf.Wolf;
 import net.minecraft.world.level.Level;
 
+@SuppressWarnings({"null"})
+
 public class SkeletonWolfEntity extends Wolf {
     public static final EntityType<SkeletonWolfEntity> TYPE = registerType();
 

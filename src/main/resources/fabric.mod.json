@@ -3,7 +3,7 @@
 	"id": "hackcraft",
 	"version": "${version}",
 	"name": "Hackcraft",
-	"description": "This mod gives you rubies! Also a ruby sword which does a lot of damage",
+	"description": "This mod gives your wolf a second chance at life! Also rubies!",
 	"authors": [
 		"Takeo Linder"
 	],
@@ -22,13 +22,6 @@
 			"net.ipv64.frenzi4309.client.HackcraftClient"
 		]
 	},
-	"mixins": [
-		"hackcraft.mixins.json",
-		{
-			"config": "hackcraft.client.mixins.json",
-			"environment": "client"
-		}
-	],
 	"depends": {
 		"fabricloader": ">=0.20.1",
 		"minecraft": "~26.3",

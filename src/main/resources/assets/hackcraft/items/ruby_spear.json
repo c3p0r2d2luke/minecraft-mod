@@ -1,6 +1,14 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "hackcraft:item/ruby_spear"
+    "type": "minecraft:condition",
+    "property": "minecraft:using_item",
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "hackcraft:item/ruby_spear_pulling"
+    },
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "hackcraft:item/ruby_spear"
+    }
   }
 }

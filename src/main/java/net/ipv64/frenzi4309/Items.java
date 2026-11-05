@@ -11,9 +11,13 @@ import net.ipv64.frenzi4309.entity.SkeletonWolfEntity;
 
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 
+@SuppressWarnings({"null"})
+
 public class Items {
 
     public static final Item RUBY = registerRuby();
+
+    public static final Item RUBY_SPEAR = registerRubySpear();
 
     public static final Item RUBY_SWORD = registerRubySword();
 
@@ -98,6 +102,22 @@ public class Items {
         );
     }
 
+    private static Item registerRubySpear() {
+        Identifier id = Identifier.fromNamespaceAndPath("hackcraft", "ruby_spear");
+        Item item = new Item(
+                new Item.Properties()
+                        .setId(ResourceKey.create(
+                                BuiltInRegistries.ITEM.key(),
+                                id
+                        ))
+        );
+        return Registry.register(
+                BuiltInRegistries.ITEM,
+                id,
+                item
+        );
+    }
+
     private static Item registerRubyAxe() {
         Identifier id = Identifier.fromNamespaceAndPath("hackcraft", "ruby_axe");
         Item item = new Item(
@@ -154,6 +174,10 @@ public class Items {
         CreativeModeTabEvents.modifyOutputEvent(
                 CreativeModeTabs.SPAWN_EGGS
         ).register(entries -> entries.accept(SKELETON_WOLF_SPAWN_EGG));
+
+        CreativeModeTabEvents.modifyOutputEvent(
+                CreativeModeTabs.COMBAT
+        ).register(entries -> entries.accept(RUBY_SPEAR));
 
         CreativeModeTabEvents.modifyOutputEvent(
                 CreativeModeTabs.COMBAT

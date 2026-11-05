@@ -11,6 +11,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCon
 public class Hackcraft implements ModInitializer {
 
     @Override
+    @SuppressWarnings({"null"})
     public void onInitialize() {
         SkeletonWolfEntity.initialize();
         Items.initialize();

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  R",
+    " D ",
+    "D  "
+  ],
+  "key": {
+    "D": "minecraft:stick",
+    "R": "hackcraft:ruby"
+  },
+  "result": {
+    "id": "hackcraft:ruby_axe",
+    "count": 1
+  }
+}

@@ -8,9 +8,11 @@ import net.ipv64.frenzi4309.client.renderer.entity.SkeletonWolfRenderer;
 import net.ipv64.frenzi4309.entity.SkeletonWolfEntity;
 
 public class HackcraftClient implements ClientModInitializer {
-	@Override
-	public void onInitializeClient() {
-		ModelLayerRegistry.registerModelLayer(SkeletonWolf.LAYER_LOCATION, SkeletonWolf::createBodyLayer);
-		EntityRendererRegistry.register(SkeletonWolfEntity.TYPE, SkeletonWolfRenderer::new);
-	}
+
+    @Override
+    @SuppressWarnings({"null", "deprecation"})
+    public void onInitializeClient() {
+        ModelLayerRegistry.registerModelLayer(SkeletonWolf.LAYER_LOCATION, SkeletonWolf::createBodyLayer);
+        EntityRendererRegistry.register(SkeletonWolfEntity.TYPE, SkeletonWolfRenderer::new);
+    }
 }

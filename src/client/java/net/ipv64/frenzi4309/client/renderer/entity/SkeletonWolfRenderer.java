@@ -7,6 +7,8 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.Identifier;
 
+@SuppressWarnings({"null"})
+
 public class SkeletonWolfRenderer extends MobRenderer<SkeletonWolfEntity, LivingEntityRenderState, SkeletonWolf> {
     private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(
             "hackcraft", "textures/entity/SkeletonWolf.png");
