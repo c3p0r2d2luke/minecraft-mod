@@ -3,9 +3,9 @@
 // Paste this class into your mod and generate all required imports
 
 
-public class new-wolf<T extends Entity> extends EntityModel<T> {
+public class SkeletonWolf<T extends Entity> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "new-wolf"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "SkeletonWolf"), "main");
 	private final ModelPart head;
 	private final ModelPart mane;
 	private final ModelPart body;
@@ -15,7 +15,7 @@ public class new-wolf<T extends Entity> extends EntityModel<T> {
 	private final ModelPart leg4;
 	private final ModelPart tail;
 
-	public new-wolf(ModelPart root) {
+	public SkeletonWolf(ModelPart root) {
 		this.head = root.getChild("head");
 		this.mane = root.getChild("mane");
 		this.body = root.getChild("body");
