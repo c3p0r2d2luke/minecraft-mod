@@ -11,7 +11,7 @@ import net.minecraft.resources.Identifier;
 
 public class SkeletonWolfRenderer extends MobRenderer<SkeletonWolfEntity, LivingEntityRenderState, SkeletonWolf> {
     private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(
-            "hackcraft", "textures/entity/SkeletonWolf.png");
+            "hackcraft", "textures/entity/skeleton_wolf.png");
 
     public SkeletonWolfRenderer(EntityRendererProvider.Context context) {
         super(context, new SkeletonWolf(context.bakeLayer(SkeletonWolf.LAYER_LOCATION)), 0.5F);
