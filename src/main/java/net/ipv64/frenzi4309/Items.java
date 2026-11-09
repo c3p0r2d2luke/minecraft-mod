@@ -1,5 +1,6 @@
 package net.ipv64.frenzi4309;
 
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -32,14 +33,23 @@ public class Items {
     public static final Item SKELETON_WOLF_SPAWN_EGG = registerSkeletonWolfSpawnEgg();
 
     private static Item registerSkeletonWolfSpawnEgg() {
-        Identifier id = Identifier.fromNamespaceAndPath("hackcraft", "skeleton_wolf_spawn_egg");
-        Item item = new Item(
-                new Item.Properties()
-                        .setId(ResourceKey.create(BuiltInRegistries.ITEM.key(), id))
-                        .spawnEgg(SkeletonWolfEntity.TYPE)
-        );
-        return Registry.register(BuiltInRegistries.ITEM, id, item);
-    }
+    Identifier id = Identifier.fromNamespaceAndPath(
+            "hackcraft",
+            "skeleton_wolf_spawn_egg"
+    );
+
+    Item.Properties properties = new Item.Properties()
+            .setId(ResourceKey.create(BuiltInRegistries.ITEM.key(), id))
+            .spawnEgg(SkeletonWolfEntity.TYPE);
+
+    Item item = new SpawnEggItem(properties);
+
+    return Registry.register(
+            BuiltInRegistries.ITEM,
+            id,
+            item
+    );
+}
 
     private static Item registerRuby() {
         Identifier id = Identifier.fromNamespaceAndPath("hackcraft", "ruby");

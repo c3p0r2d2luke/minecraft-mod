@@ -19,37 +19,41 @@ public abstract class SkeletonSpawn {
 
     @Inject(method = "finalizeSpawn", at = @At("RETURN"))
     private void onSkeletonSpawn(
-        ServerLevelAccessor level,
-        DifficultyInstance difficulty,
-        EntitySpawnReason spawnReason,
-        SpawnGroupData spawnGroupData,
-        CallbackInfoReturnable<SpawnGroupData> cir
+            ServerLevelAccessor level,
+            DifficultyInstance difficulty,
+            EntitySpawnReason spawnReason,
+            SpawnGroupData spawnGroupData,
+            CallbackInfoReturnable<SpawnGroupData> cir
     ) {
         Mob mob = (Mob) (Object) this;
 
-        // Only affect skeletons
+        // Only affect skeletons.
         if (!(mob instanceof Skeleton skeleton)) {
             return;
         }
 
-        // 15% chance to spawn a skeleton wolf companion
+        // 15% chance to spawn a skeleton wolf companion.
         if (!level.isClientSide() && level.getRandom().nextFloat() < 0.15F) {
 
             SkeletonWolfEntity wolf = SkeletonWolfEntity.TYPE.create(
-                skeleton.level(),
-                EntitySpawnReason.EVENT
+                    skeleton.level(),
+                    EntitySpawnReason.EVENT
             );
 
             if (wolf != null) {
                 wolf.setPos(
-                    skeleton.getX(),
-                    skeleton.getY(),
-                    skeleton.getZ()
+                        skeleton.getX(),
+                        skeleton.getY(),
+                        skeleton.getZ()
                 );
 
                 wolf.setYRot(skeleton.getYRot());
                 wolf.setXRot(skeleton.getXRot());
 
+                // Mark the wolf as tamed.
+                wolf.setTame(true, true);
+
+                // Assign its skeleton owner.
                 wolf.setSkeletonOwner(skeleton);
 
                 level.addFreshEntity(wolf);
@@ -57,3 +61,4 @@ public abstract class SkeletonSpawn {
         }
     }
 }
+

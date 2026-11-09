@@ -1,3 +1,4 @@
+
 package net.ipv64.frenzi4309.entity;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -20,7 +21,9 @@ import java.util.EnumSet;
 
 @SuppressWarnings({"null"})
 public class SkeletonWolfEntity extends Wolf {
+
     public static final EntityType<SkeletonWolfEntity> TYPE = registerType();
+
     private Skeleton skeletonOwner;
 
     public SkeletonWolfEntity(EntityType<? extends SkeletonWolfEntity> type, Level level) {
@@ -38,9 +41,14 @@ public class SkeletonWolfEntity extends Wolf {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        // Follow skeleton owner when nearby
+
+        // Follow the skeleton when it gets more than 10 blocks away.
         this.goalSelector.addGoal(6, new FollowSkeletonGoal(this, 1.25));
-        // Target whatever the skeleton attacks or targets
+
+        // Sit when the skeleton is idle and nearby.
+        this.goalSelector.addGoal(7, new SkeletonIdleSitGoal(this));
+
+        // Attack whatever the skeleton attacks.
         this.targetSelector.addGoal(1, new SkeletonTargetGoal(this));
     }
 
@@ -58,46 +66,134 @@ public class SkeletonWolfEntity extends Wolf {
 
     private static EntityType<SkeletonWolfEntity> registerType() {
         Identifier id = Identifier.fromNamespaceAndPath("hackcraft", "skeleton_wolf");
-        ResourceKey<EntityType<?>> key = ResourceKey.create(Registries.ENTITY_TYPE, id);
-        
+
+        ResourceKey<EntityType<?>> key =
+                ResourceKey.create(Registries.ENTITY_TYPE, id);
+
         EntityType<SkeletonWolfEntity> type = EntityType.Builder
-                .of(SkeletonWolfEntity::new, MobCategory.MONSTER)
+                .of(SkeletonWolfEntity::new, MobCategory.CREATURE)
                 .sized(0.6F, 0.85F)
                 .clientTrackingRange(10)
                 .build(key);
-                
+
         return Registry.register(BuiltInRegistries.ENTITY_TYPE, id, type);
     }
 
-    // AI Goal: Navigation to follow Skeleton
+    // Follows the skeleton when it is more than 10 blocks away.
     static class FollowSkeletonGoal extends Goal {
+
         private final SkeletonWolfEntity wolf;
         private final double speed;
 
         public FollowSkeletonGoal(SkeletonWolfEntity wolf, double speed) {
             this.wolf = wolf;
             this.speed = speed;
+
             this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
         }
 
         @Override
         public boolean canUse() {
             Skeleton owner = this.wolf.getSkeletonOwner();
-            return owner != null && owner.isAlive() && this.wolf.distanceToSqr(owner) > 12.0;
+
+            return owner != null
+                    && owner.isAlive()
+                    && this.wolf.distanceToSqr(owner) > 100.0;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            Skeleton owner = this.wolf.getSkeletonOwner();
+
+            return owner != null
+                    && owner.isAlive()
+                    && this.wolf.distanceToSqr(owner) > 100.0;
+        }
+
+        @Override
+        public void start() {
+            this.wolf.setOrderedToSit(false);
         }
 
         @Override
         public void tick() {
             Skeleton owner = this.wolf.getSkeletonOwner();
+
             if (owner != null) {
-                this.wolf.getLookControl().setLookAt(owner, 10.0F, (float) this.wolf.getMaxHeadXRot());
+                this.wolf.getLookControl().setLookAt(
+                        owner,
+                        10.0F,
+                        (float) this.wolf.getMaxHeadXRot()
+                );
+
                 this.wolf.getNavigation().moveTo(owner, this.speed);
             }
         }
+
+        @Override
+        public void stop() {
+            this.wolf.getNavigation().stop();
+        }
     }
 
-    // AI Goal: Targeting Skeleton's target
+    // Makes the skeleton wolf sit when its skeleton is idle and nearby.
+    static class SkeletonIdleSitGoal extends Goal {
+
+        private final SkeletonWolfEntity wolf;
+
+        public SkeletonIdleSitGoal(SkeletonWolfEntity wolf) {
+            this.wolf = wolf;
+
+            this.setFlags(EnumSet.of(Goal.Flag.MOVE));
+        }
+
+        @Override
+        public boolean canUse() {
+            Skeleton owner = this.wolf.getSkeletonOwner();
+
+            if (owner == null || !owner.isAlive()) {
+                return false;
+            }
+
+            // Do not sit during combat.
+            if (owner.getTarget() != null) {
+                return false;
+            }
+
+            // Only sit when the skeleton is within 10 blocks.
+            if (this.wolf.distanceToSqr(owner) > 100.0) {
+                return false;
+            }
+
+            // Check whether the skeleton is essentially stationary.
+            return owner.getDeltaMovement().horizontalDistanceSqr() < 0.0025;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            Skeleton owner = this.wolf.getSkeletonOwner();
+
+            return owner != null
+                    && owner.isAlive()
+                    && owner.getTarget() == null
+                    && this.wolf.distanceToSqr(owner) <= 100.0;
+        }
+
+        @Override
+        public void start() {
+            this.wolf.setOrderedToSit(true);
+            this.wolf.getNavigation().stop();
+        }
+
+        @Override
+        public void tick() {
+            this.wolf.getNavigation().stop();
+        }
+    }
+
+    // Targets the same enemies as the skeleton owner.
     static class SkeletonTargetGoal extends TargetGoal {
+
         private final SkeletonWolfEntity wolf;
 
         public SkeletonTargetGoal(SkeletonWolfEntity wolf) {
@@ -108,17 +204,21 @@ public class SkeletonWolfEntity extends Wolf {
         @Override
         public boolean canUse() {
             Skeleton owner = this.wolf.getSkeletonOwner();
+
             if (owner != null && owner.isAlive() && owner.getTarget() != null) {
                 this.targetMob = owner.getTarget();
                 return true;
             }
+
             return false;
         }
 
         @Override
         public void start() {
+            this.wolf.setOrderedToSit(false);
             this.mob.setTarget(this.targetMob);
             super.start();
         }
     }
 }
+
